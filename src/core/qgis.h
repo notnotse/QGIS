@@ -20,7 +20,7 @@
 
 #include <QEvent>
 #include <QString>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QMetaType>
 #include <QMap>
 #include <QMetaEnum>
@@ -239,7 +239,7 @@ CORE_EXPORT uint qHash( const QVariant &variant );
 inline QString qgsDoubleToString( double a, int precision = 17 )
 {
   if ( precision )
-    return QString::number( a, 'f', precision ).remove( QRegExp( "\\.?0+$" ) );
+    return QString::number( a, 'f', precision ).remove( QRegularExpression( "\\.?0+$" ) ).replace( QRegularExpression( "^-0$" ), QStringLiteral( "0" ) );
   else
     return QString::number( a, 'f', precision );
 }
